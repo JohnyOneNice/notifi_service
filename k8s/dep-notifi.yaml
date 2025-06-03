@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notifi-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: notifi-service # Service_user.yaml будет смотреть на этот лейбл Подов
+    spec:
+      containers:
+        - name: notifiproject
+          image: johnynice/notifiproject1:1
+          #imagePullPolicy: IfNotPresent #Использовать образ из DockerHUb, если не нашли локально
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POSTGRES_USER
+              value: myuser
+            - name: POSTGRES_PASSWORD
+              value: mypassword
