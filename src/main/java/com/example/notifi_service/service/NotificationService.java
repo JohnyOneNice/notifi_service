@@ -34,6 +34,15 @@ public class NotificationService {
                 .collect(Collectors.toList());
     }
 
+    public void saveFromKafka(NotificationRequest request) {
+        Notification notification = Notification.builder()
+                .userId(request.getUserId())
+                .message(request.getMessage())
+                .createdAt(LocalDateTime.now())
+                .build();
+        repository.save(notification);
+    }
+
     private NotificationResponse toResponse(Notification n) {
         return NotificationResponse.builder()
                 .id(n.getId())

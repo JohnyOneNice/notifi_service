@@ -1,4 +1,4 @@
 FROM amazoncorretto:17-alpine
-COPY notifi_service1.jar notifiproject1.jar
+COPY notifi_service3.jar notifiproject3.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","notifiproject1.jar"]
+ENTRYPOINT ["java","-jar","notifiproject3.jar"]
